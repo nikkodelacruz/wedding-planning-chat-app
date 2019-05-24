@@ -1,0 +1,17 @@
+{
+  "name": "socket-chat",
+  "version": "1.0.0",
+  "description": "live chat using socket.io",
+  "main": "server.js",
+  "author": "nikko delacruz",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dateformat": "^3.0.3",
+    "express": "^4.15.2",
+    "mysql": "^2.17.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "socket.io": "^2.2.0"
+  }
+}
