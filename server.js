@@ -2,7 +2,7 @@ var app         = require("express")();
 var bodyParser  = require('body-parser');
 var http        = require('http').Server(app);
 var io          = require("socket.io")(http);
-var mysql       = require("mysql");
+// var mysql       = require("mysql");
 var dateFormat  = require('dateformat');
 var rp          = require('request-promise');
 var PORT        = process.env.PORT || 3000; //port number whatever heroku gives
@@ -16,14 +16,14 @@ app.use(bodyParser.json());
 
 
 //conncecting nodejs to remote mysql
-var con = mysql.createConnection({
-  connectionLimit :  100,
-  host            : 'localhost',
-  user            : 'root',
-  password        : '',
-  database        : 'chat'
-});
-con.connect();
+// var con = mysql.createConnection({
+//   connectionLimit :  100,
+//   host            : 'localhost',
+//   user            : 'root',
+//   password        : '',
+//   database        : 'chat'
+// });
+// con.connect();
 
 
 // app.get("/",function(req,res){
@@ -83,36 +83,36 @@ var today = dateFormat(now, "mmmm d, yyyy");
 io.on('connection',function(socket){
 
   // authenticating and gettting user 
-  socket.on('validate',function(data){    
-    // console.log(data);  
+  // socket.on('validate',function(data){    
+  //   // console.log(data);  
 
-    var query = "SELECT * from message WHERE uid = '"+data+"' ";
-    con.query( String(query), function(err, rows) {
-      if ( err ) throw err;
-      if( rows.length>0 ){
-        // console.log(rows);
+  //   var query = "SELECT * from message WHERE uid = '"+data+"' ";
+  //   con.query( String(query), function(err, rows) {
+  //     if ( err ) throw err;
+  //     if( rows.length>0 ){
+  //       // console.log(rows);
         
-        //Getting all the messages 
-        var get_message = "SELECT * FROM message";
-        con.query( String(get_message), function(err, rows) {
-          if ( err ) throw err;
-          // console.log(rows);
+  //       //Getting all the messages 
+  //       var get_message = "SELECT * FROM message";
+  //       con.query( String(get_message), function(err, rows) {
+  //         if ( err ) throw err;
+  //         // console.log(rows);
   
-          // saving username in socket object 
-          // socket.nickname=rows[0].meta_value;
+  //         // saving username in socket object 
+  //         // socket.nickname=rows[0].meta_value;
 
-          //sending response to client side code.  
-          io.emit('user entrance',{
-            // info : rows[0].meta_value+" is online.",
-            rows : rows
-          });
+  //         //sending response to client side code.  
+  //         io.emit('user entrance',{
+  //           // info : rows[0].meta_value+" is online.",
+  //           rows : rows
+  //         });
 
-        });
+  //       });
 
-      }
-    });
+  //     }
+  //   });
 
-  });
+  // });
 
   // get all messages
   socket.on('get all messages', function function_name(data) {
