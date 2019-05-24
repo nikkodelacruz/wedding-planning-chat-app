@@ -5,6 +5,7 @@ var io          = require("socket.io")(http);
 var mysql       = require("mysql");
 var dateFormat  = require('dateformat');
 var rp          = require('request-promise');
+var PORT        = process.env.PORT || 3000; //port number whatever heroku gives
 
 
 app.use(require("express").static('data'));
@@ -176,6 +177,6 @@ io.on('connection',function(socket){
 });
 
 
-http.listen(3000,function(){
-    console.log('listening to port 3000');
+http.listen(PORT,function(){
+    console.log('listening to port: '+PORT);
 });
