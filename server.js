@@ -90,6 +90,12 @@ io.on('connection',function(socket){
 
   });
 
+  // Seen the message if customer or supplier is open
+  socket.on('seen message', function(data){
+    var api = data.api;
+    seen_message( api )
+  });
+
   // get all messages
   // socket.on('get all messages', function(data){
   //   var sup_id = data.supplier_id;
@@ -173,6 +179,22 @@ function get_all_messages_api( sup_id, cus_id, user_id, api ){
       });
     }
   }).catch(function (err) {
+    console.log(err);
+  });
+}
+
+/*==================================================*/
+/* Seen the message for sender and receiver if open */
+/*==================================================*/
+function seen_message( api ){
+  var options = {
+    method : 'GET',
+    uri : api,
+    json : true
+  };
+  rp(options).then(function (response) {
+    console.log(response);
+  }).catch(function (err){
     console.log(err);
   });
 }
